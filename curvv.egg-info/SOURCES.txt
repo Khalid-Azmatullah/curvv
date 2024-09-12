@@ -1,0 +1,9 @@
+LICENSE.txt
+README.md
+setup.py
+curvv/__init__.py
+curvv/main.py
+curvv.egg-info/PKG-INFO
+curvv.egg-info/SOURCES.txt
+curvv.egg-info/dependency_links.txt
+curvv.egg-info/top_level.txt
