@@ -55,7 +55,7 @@ def packageSafety(*args):
     except:
       try:
         subprocess.run(
-          [sys.executable, '-m', 'pip', 'install', args[package]],
+          [sys.executable, "-m", "pip", "install", args[package]],
           stdout=subprocess.PIPE,
           stderr=subprocess.PIPE
         )
@@ -93,13 +93,85 @@ def repoCreate(token, repoName, repoType):
     repoType = "false"
   elif repoType == "private":
     repoType == "true"
-  subprocess.run(["ruby", "gitCreateRepo.rb", token, repoName, repoType])
+  import os
+  import subprocess
+  
+  rubyCode = """
+require 'net/http'
+require 'json'
+require 'uri'
 
-def runCvvCommands(*args):
-    command = args[0]
-    commandList = ["repo.new"]
-    if command == commandList[0]:
-      tokenClient = args[1]
-      repoNameClient = args[2]
-      repoTypeClient = args[3]
-      repoCreate(token=tokenClient, repoName=repoNameClient, repoType=repoTypeClient)
+
+repoName = ARGV[1]
+repoType = ARGV[2]
+token = ARGV[0]
+
+def string_to_boolean(str)
+  return true if str.is_a?(String) && (str.downcase == 'true' || str == '1')
+  return false if str.is_a?(String) && (str.downcase == 'false' || str == '0')
+  
+  nil  # return nil if the string is not recognized
+end
+
+repoType = string_to_boolean(repoType)
+
+uri = URI('https://api.github.com/user/repos')
+
+# Set up the HTTP request
+request = Net::HTTP::Post.new(uri)
+request.content_type = 'application/json'
+request['Authorization'] = "token #\{token\}"
+request['User-Agent'] = 'Ruby'
+
+# Repository data
+request.body = JSON.dump({
+  name: repoName,
+  description: '',
+  private: repoType # Set to true for a private repo
+})
+
+# Make the request
+response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
+  http.request(request)
+end
+
+# Handle the response
+case response
+when Net::HTTPSuccess
+  puts "Repository created: #{JSON.parse(response.body)['html_url']}"
+else
+  puts "Error creating repository: #\{response.message\}"
+end
+  """
+  rubyFile = 'tempScript.rb'
+  with open(rubyFile, 'w') as file:
+      file.write(rubyCode)
+  try:
+      result = subprocess.run(["ruby", rubyFile, token, repoName, repoType])
+      print("Result: ")
+      print(result.stdout)
+      if result.stderr:
+          print("Error while connecting")
+          print(result.stderr)
+  except Exception as e:
+      print(f"Error while connecting: {e}")
+  try:
+      os.remove(rubyFile)
+      print(f"Deleted Ruby file: {rubyFile}")
+  except Exception as e:
+      print(f"Error deleting Ruby file: {e}")
+
+
+import argparse
+def runCvvCommands():
+  parser = argparse.ArgumentParser(description="Command for running Curvv functions")
+  parser.add_argument("arg1", help="Curvv function you want to run.")
+  parser.add_argument("arg2", help="Additional Dependencies")
+  parser.add_argument("arg3", help="Additional Dependencies")
+  parser.add_argument("arg4", help="Additional Dependencies")
+  
+  args = parser.parse_args()
+  command = args.arg1
+  commandList = ["repo.new"]
+  if command == commandList[0]:
+    repoCreate(token=args.arg2, repoName=args.arg3, repoType=args.arg4)
