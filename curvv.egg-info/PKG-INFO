@@ -1,9 +1,15 @@
 Metadata-Version: 2.1
 Name: curvv
-Version: 0.4.1
+Version: 0.4.3
 Summary: A Python Package for increase in success of deployability of a program on a different device.
 Description-Content-Type: text/markdown
 License-File: LICENSE.txt
+Requires-Dist: bs4
+Requires-Dist: requests
+Requires-Dist: colorama
+Requires-Dist: rich
+Requires-Dist: importlib
+Requires-Dist: argparse
 
 # Curvv
 

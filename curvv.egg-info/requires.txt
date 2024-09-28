@@ -1,0 +1,6 @@
+bs4
+requests
+colorama
+rich
+importlib
+argparse

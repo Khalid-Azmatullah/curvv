@@ -21,7 +21,7 @@ def errorCode(*args):
   quit()
   
 # downloading external packages
-externalPackageRequirements = ["bs4", "requests", "colorama", "rich", "importlib"]
+externalPackageRequirements = ["bs4", "requests", "colorama", "rich", "importlib", "argparse"]
 for i in range(len(externalPackageRequirements)):
   try:
     __import__(externalPackageRequirements[i])
@@ -87,3 +87,19 @@ def clearCache():
         pycFile.unlink()
     for pycacheDir in path.rglob("__pycache__"):
         pycacheDir.rmdir()
+
+def repoCreate(token, repoName, repoType):
+  if repoType == "public":
+    repoType = "false"
+  elif repoType == "private":
+    repoType == "true"
+  subprocess.run(["ruby", "gitCreateRepo.rb", token, repoName, repoType])
+
+def runCvvCommands(*args):
+    command = args[0]
+    commandList = ["repo.new"]
+    if command == commandList[0]:
+      tokenClient = args[1]
+      repoNameClient = args[2]
+      repoTypeClient = args[3]
+      repoCreate(token=tokenClient, repoName=repoNameClient, repoType=repoTypeClient)

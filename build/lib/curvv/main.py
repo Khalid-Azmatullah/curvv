@@ -31,20 +31,21 @@ for i in range(len(externalPackageRequirements)):
     except:
       errorCode("package-installation-error")
 
-import requests
-from bs4 import BeautifulSoup as htmlParser
+def importModuleLibrary():
+  import requests
+  from bs4 import BeautifulSoup as htmlParser
 
-moduleLibrary = {}
-urlForModuleLibrary = "https://docs.python.org/3/py-modindex.html"
-response = requests.get(urlForModuleLibrary)
-if response.status_code == 200: #ok
-    snakeForWebScarping = htmlParser(response.content, "html.parser")
-    moduleNameList = snakeForWebScarping.find_all(class_="xref")
+  moduleLibrary = {}
+  urlForModuleLibrary = "https://docs.python.org/3/py-modindex.html"
+  response = requests.get(urlForModuleLibrary)
+  if response.status_code == 200: #ok
+      snakeForWebScarping = htmlParser(response.content, "html.parser")
+      moduleNameList = snakeForWebScarping.find_all(class_="xref")
 
-    for module in moduleNameList:
-      moduleLibrary[module.text] = f"{module.text}"
-else:
-    print(f"Failed to retrieve module library. Status code: {response.status_code}")
+      for module in moduleNameList:
+        moduleLibrary[module.text] = f"{module.text}"
+  else:
+      print(f"Failed to retrieve module library. Status code: {response.status_code}")
 
 
 def packageSafety(*args):
