@@ -92,74 +92,72 @@ def repoCreate(token, repoName, repoType):
   if repoType == "public":
     repoType = "false"
   elif repoType == "private":
-    repoType == "true"
+    repoType = "true"
   import os
   import subprocess
   
-  rubyCode = """
-require 'net/http'
-require 'json'
-require 'uri'
+  pythonCode = """
+import sys
+import requests
+import json
 
+# Get arguments from command line
+token = sys.argv[1]
+repo_name = sys.argv[2]
+repo_type = sys.argv[3]
 
-repoName = ARGV[1]
-repoType = ARGV[2]
-token = ARGV[0]
+# Function to convert string to boolean
+def string_to_boolean(s):
+    if isinstance(s, str):
+        if s.lower() in ['true', '1']:
+            return True
+        elif s.lower() in ['false', '0']:
+            return False
+    return None  # Return None if the string is not recognized
 
-def string_to_boolean(str)
-  return true if str.is_a?(String) && (str.downcase == 'true' || str == '1')
-  return false if str.is_a?(String) && (str.downcase == 'false' || str == '0')
-  
-  nil  # return nil if the string is not recognized
-end
+# Convert repo_type to boolean
+repo_type = string_to_boolean(repo_type)
 
-repoType = string_to_boolean(repoType)
+# GitHub API URL for creating a repository
+url = 'https://api.github.com/user/repos'
 
-uri = URI('https://api.github.com/user/repos')
-
-# Set up the HTTP request
-request = Net::HTTP::Post.new(uri)
-request.content_type = 'application/json'
-request['Authorization'] = "token #\{token\}"
-request['User-Agent'] = 'Ruby'
+# Set up the HTTP request headers
+headers = {
+    'Authorization': 'token ' + token,
+    'User-Agent': 'Python'
+}
 
 # Repository data
-request.body = JSON.dump({
-  name: repoName,
-  description: '',
-  private: repoType # Set to true for a private repo
-})
+data = {
+    'name': repo_name,
+    'description': '',
+    'private': repo_type  # Set to True for a private repo
+}
 
-# Make the request
-response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
-  http.request(request)
-end
+# Make the POST request
+response = requests.post(url, headers=headers, json=data)
 
 # Handle the response
-case response
-when Net::HTTPSuccess
-  puts "Repository created: #{JSON.parse(response.body)['html_url']}"
-else
-  puts "Error creating repository: #\{response.message\}"
-end
+if response.status_code == 201:  # HTTP Created
+    print("Repository created: " + response.json()['html_url'])
+else:
+    print(f"Error creating repository: " + str(response.status_code) + response.text)
   """
-  rubyFile = 'tempScript.rb'
-  with open(rubyFile, 'w') as file:
-      file.write(rubyCode)
+  pythonFile = 'tempScript.py'
+  with open(pythonFile, 'w') as file:
+      file.write(pythonCode)
   try:
-      result = subprocess.run(["ruby", rubyFile, token, repoName, repoType])
-      print("Result: ")
-      print(result.stdout)
+      result = subprocess.run(["python", pythonFile, token, repoName, repoType])
       if result.stderr:
           print("Error while connecting")
           print(result.stderr)
   except Exception as e:
       print(f"Error while connecting: {e}")
   try:
-      os.remove(rubyFile)
-      print(f"Deleted Ruby file: {rubyFile}")
+      os.remove(pythonFile)
+      print(f"^")
   except Exception as e:
-      print(f"Error deleting Ruby file: {e}")
+      print(f"Error deleting file: {e}")
 
 
 import argparse

@@ -1,3 +1,4 @@
+
 require 'net/http'
 require 'json'
 require 'uri'
@@ -6,6 +7,8 @@ require 'uri'
 repoName = ARGV[1]
 repoType = ARGV[2]
 token = ARGV[0]
+
+puts(repoType)
 
 def string_to_boolean(str)
   return true if str.is_a?(String) && (str.downcase == 'true' || str == '1')
@@ -21,7 +24,7 @@ uri = URI('https://api.github.com/user/repos')
 # Set up the HTTP request
 request = Net::HTTP::Post.new(uri)
 request.content_type = 'application/json'
-request['Authorization'] = "token #{token}"
+request['Authorization'] = "token " + token
 request['User-Agent'] = 'Ruby'
 
 # Repository data
@@ -39,7 +42,7 @@ end
 # Handle the response
 case response
 when Net::HTTPSuccess
-  puts "Repository created: #{JSON.parse(response.body)['html_url']}"
+  puts "Repository created: " + JSON.parse(response.body)['html_url']
 else
   puts "Error creating repository: #{response.message}"
 end
