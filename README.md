@@ -1,6 +1,7 @@
 <h1 align="center">
 <img src="library/Curvv..svg" width="300">
 </h1><br>
+
 [Curvv](https://pypi.org/project/curvv/) is an open-minded **python package** which focuses on **deployability** of a program on devices which do not have required packages installed along with other functionality.
 
 To install curvv run:
