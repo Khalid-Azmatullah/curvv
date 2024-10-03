@@ -9,3 +9,5 @@ curvv.egg-info/dependency_links.txt
 curvv.egg-info/entry_points.txt
 curvv.egg-info/requires.txt
 curvv.egg-info/top_level.txt
+curvv/_func/__init__.py
+curvv/_func/packageSafety.py

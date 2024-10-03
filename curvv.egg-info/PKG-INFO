@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: curvv
-Version: 0.4.14
+Version: 0.4.20
 Summary: A Python Package for increase in success of deployability of a program on a different device.
 Description-Content-Type: text/markdown
 License-File: LICENSE.txt
@@ -50,7 +50,7 @@ Curvv has CLI commands for many tasks including creating github repos.
 
 Simply run the following in the command prompt:
 ```
-cvv repo.new {your_github_api} {repository_name} {repository_type}
+cvv gh-new --token {your_github_api} {repository_name} {repository_type}
 ```
 
 ## Last Updated:

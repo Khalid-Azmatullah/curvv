@@ -9,7 +9,7 @@ with open("shD.md", "r") as file:
 
 setup(
   name="curvv",
-  version="0.4.7",
+  version="0.4.20",
   packages=find_packages(),
   install_requires=[
     "bs4",

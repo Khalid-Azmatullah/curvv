@@ -1,1 +1,3 @@
-from .main import packageSafety, end, wait, clearCache, runCvvCommands
+from .main import end, wait, clearCache, runCvvCommands
+from . import _func
+from ._func import (packageSafety)

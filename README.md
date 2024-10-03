@@ -1,4 +1,4 @@
-# Curvv
+![curvv-logo](docs/library/logo.svg)
 
 [Curvv](https://pypi.org/project/curvv/) is an open-minded **python package** which focuses on **deployability** of a program on devices which do not have required packages installed along with other functionality.
 
@@ -30,6 +30,15 @@ Other funx include:
 - wait( *\*time* )
 - end( *\*time* )
 - clearCache()
+
+## Other CLI commands
+
+Curvv has CLI commands for many tasks including creating github repos. 
+
+Simply run the following in the command prompt:
+```
+cvv gh-new --token {your_github_api} {repository_name} {repository_type}
+```
 
 ## Last Updated:
 ```

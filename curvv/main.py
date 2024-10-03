@@ -47,22 +47,6 @@ def importModuleLibrary():
   else:
       print(f"Failed to retrieve module library. Status code: {response.status_code}")
 
-
-def packageSafety(*args):
-  for package in range(len(args)):
-    try:
-      __import__(args[package])
-    except:
-      try:
-        subprocess.run(
-          [sys.executable, "-m", "pip", "install", args[package]],
-          stdout=subprocess.PIPE,
-          stderr=subprocess.PIPE
-        )
-        __import__(args[package])
-      except:
-        return errorCode("client-package-download-error" ,package)
-
 def end(*args):
   if len(args) == 0:
     trash = input() 
@@ -88,7 +72,44 @@ def clearCache():
     for pycacheDir in path.rglob("__pycache__"):
         pycacheDir.rmdir()
 
-def repoCreate(token, repoName, repoType):
+def q_m():
+  print("\n\n\n\nStill under Production!\n\n\n\n")
+  quit()
+
+def repoCreate(token=None, repoName=None, repoType=None):
+  print(f"{token} {repoName} {repoType}")
+  import os
+  apiToken = os.getenv("GITHUB_API")
+  if token is None and repoName is None and repoType is None:
+    
+    q_m()
+  elif repoName is not None and repoType is None:
+    repoName = repoName
+    repoType = "public"
+    if token is None:
+      if apiToken is None or apiToken == "":
+        print("TokenNotFoundError: Please provide a valid token.")
+        quit()
+      else:
+        token = apiToken
+    else:
+      token = token
+    
+  elif repoName is not None and repoType is not None:
+    repoName = repoName
+    repoType = repoType
+    if token is None:
+      if apiToken is None or apiToken == "":
+        print("TokenNotFoundError: Please provide a valid token.")
+        quit()
+      else:
+        token = apiToken
+    elif token is not None:
+      token = token
+  elif repoName is None:
+    q_m()
+  
+  
   if repoType == "public":
     repoType = "false"
   elif repoType == "private":
@@ -145,31 +166,52 @@ else:
   """
   pythonFile = 'tempScript.py'
   with open(pythonFile, 'w') as file:
-      file.write(pythonCode)
+    file.write(pythonCode)
   try:
-      result = subprocess.run(["python", pythonFile, token, repoName, repoType])
-      if result.stderr:
-          print("Error while connecting")
-          print(result.stderr)
+    result = subprocess.run(["python", pythonFile, token, repoName, repoType])
+    if result.stderr:
+      print("Error while connecting")
+      print(result.stderr)
   except Exception as e:
-      print(f"Error while connecting: {e}")
+    print(f"Error while connecting: {e}")
   try:
-      os.remove(pythonFile)
-      print(f"^")
+    os.remove(pythonFile)
+    print(f"^")
   except Exception as e:
-      print(f"Error deleting file: {e}")
+    print(f"Error deleting file: {e}")
 
 
 import argparse
 def runCvvCommands():
   parser = argparse.ArgumentParser(description="Command for running Curvv functions")
-  parser.add_argument("arg1", help="Curvv function you want to run.")
-  parser.add_argument("arg2", help="Additional Dependencies")
-  parser.add_argument("arg3", help="Additional Dependencies")
-  parser.add_argument("arg4", help="Additional Dependencies")
+  parser.add_argument(
+    "commandCall",
+    help="curvv function you want to run"
+    )
+  parser.add_argument(
+    "-tk",
+    "--token",
+    help="provide token for function",
+    metavar="TOKEN",
+    dest="token"
+    )
+  parser.add_argument(
+    "-n",
+    "--name",
+    help="name of repository",
+    metavar="REPO_NAME",
+    dest="repoName"
+    )
+  parser.add_argument(
+    "--type",
+    help="type of repository",
+    metavar="TYPE",
+    dest="repoType"
+    )
   
   args = parser.parse_args()
-  command = args.arg1
-  commandList = ["repo.new"]
+  command = args.commandCall
+  commandList = ["gh-new"]
+  
   if command == commandList[0]:
-    repoCreate(token=args.arg2, repoName=args.arg3, repoType=args.arg4)
+    repoCreate(token=args.token, repoName=args.repoName, repoType=args.repoType)
