@@ -44,7 +44,7 @@ cvv gh-new --token {your_github_api} {repository_name} {repository_type}
 
 ## Last Updated:
 ```
-26/09/2024
+03/10/2024
 ```
 
 ## Issues
