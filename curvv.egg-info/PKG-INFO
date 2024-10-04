@@ -1,7 +1,10 @@
 Metadata-Version: 2.1
 Name: curvv
-Version: 0.4.20
+Version: 0.4.22
 Summary: A Python Package for increase in success of deployability of a program on a different device.
+Home-page: https://github.com/Khalid-Azmatullah/curvv
+Author: Khalid Azmatullah
+Classifier: Topic :: Desktop Environment
 Description-Content-Type: text/markdown
 License-File: LICENSE.txt
 Requires-Dist: bs4
@@ -11,7 +14,9 @@ Requires-Dist: rich
 Requires-Dist: importlib
 Requires-Dist: argparse
 
-# Curvv
+<h1 align="center">
+<img src="library/Curvv..svg" width="300">
+</h1><br>
 
 [Curvv](https://pypi.org/project/curvv/) is an open-minded **python package** which focuses on **deployability** of a program on devices which do not have required packages installed along with other functionality.
 
@@ -50,12 +55,12 @@ Curvv has CLI commands for many tasks including creating github repos.
 
 Simply run the following in the command prompt:
 ```
-cvv gh-new --token {your_github_api} {repository_name} {repository_type}
+cvv gh-new --token TOKEN --name NAME --type TYPE
 ```
 
 ## Last Updated:
 ```
-26/09/2024
+04/10/2024
 ```
 
 ## Issues

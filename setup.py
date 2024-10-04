@@ -9,7 +9,7 @@ with open("shD.md", "r") as file:
 
 setup(
   name="curvv",
-  version="0.4.20",
+  version="0.4.22",
   packages=find_packages(),
   install_requires=[
     "bs4",
@@ -19,9 +19,14 @@ setup(
     "importlib",
     "argparse",
   ],
+  author="Khalid Azmatullah",
+  url="https://github.com/Khalid-Azmatullah/curvv",
+  classifiers=[
+    "Topic :: Desktop Environment",
+  ],
   entry_points={
-    'console_scripts': [
-      'cvv=curvv:runCvvCommands',
+    "console_scripts": [
+      "cvv=curvv:runCvvCommands",
     ],
   },
   description=shortDescription,

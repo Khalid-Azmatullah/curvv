@@ -1,7 +1,6 @@
-import subprocess
-import sys
-
 def packageSafety(*args):
+  import subprocess
+  import sys
   uninstalledPackages = []
   for package in range(len(args)):
     try:
