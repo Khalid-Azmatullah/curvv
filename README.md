@@ -39,12 +39,12 @@ Curvv has CLI commands for many tasks including creating github repos.
 
 Simply run the following in the command prompt:
 ```
-cvv gh-new --token {your_github_api} {repository_name} {repository_type}
+cvv gh-new --token TOKEN --name NAME --type TYPE
 ```
 
 ## Last Updated:
 ```
-03/10/2024
+05/10/2024
 ```
 
 ## Issues
