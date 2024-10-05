@@ -1,19 +1,3 @@
-Metadata-Version: 2.1
-Name: curvv
-Version: 0.4.23
-Summary: A Python Package for increase in success of deployability of a program on a different device.
-Home-page: https://github.com/Khalid-Azmatullah/curvv
-Author: Khalid Azmatullah
-Classifier: Topic :: Desktop Environment
-Description-Content-Type: text/markdown
-License-File: LICENSE.txt
-Requires-Dist: bs4
-Requires-Dist: requests
-Requires-Dist: colorama
-Requires-Dist: rich
-Requires-Dist: importlib
-Requires-Dist: argparse
-
 <h1 align="center">
 <img src="_library/Curvv.svg" width="300">
 </h1><br>

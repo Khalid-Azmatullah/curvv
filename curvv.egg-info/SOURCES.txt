@@ -16,3 +16,5 @@ curvv/_func/importModuleLibrary.py
 curvv/_func/initialize.py
 curvv/_func/packageSafety.py
 curvv/_func/wait.py
+curvv/_library/__init__.py
+curvv/_library/curvv.py

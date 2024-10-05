@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-with open("README.md", "r") as file:
+with open("library/PYPI-README.md", "r") as file:
   longDescription = file.read()
   file.close()
 with open("shD.md", "r") as file:
@@ -9,7 +9,7 @@ with open("shD.md", "r") as file:
 
 setup(
   name="curvv",
-  version="0.4.22",
+  version="0.4.23",
   packages=find_packages(),
   install_requires=[
     "bs4",
