@@ -39,16 +39,25 @@ Other funx include:
 
 ## Other CLI commands
 
-Curvv has CLI commands for many tasks including creating github repos. 
+Curvv has CLI commands for various tasks. 
+
+### New Github Repository.
 
 Simply run the following in the command prompt:
 ```
 cvv gh-new --token TOKEN --name NAME --type TYPE
 ```
 
+### TaskVault Portable (Beta version 0.0.2)
+
+Simply run the following in the command prompt:
+```
+cvv async --launch TSV
+```
+
 ## Last Updated:
 ```
-04/10/2024
+05/10/2024
 ```
 
 ## Issues
